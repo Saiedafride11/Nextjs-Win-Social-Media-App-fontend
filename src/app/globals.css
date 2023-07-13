@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+*,
+body,
+html {
+  scrollbar-width: thin !important;
+}
+body {
+  background-color: #f0f2f5;
+}
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-button {
+  background: #ccc;
+}
+::-webkit-scrollbar-track-piece {
+  background: #888;
+}
+::-webkit-scrollbar-thumb {
+  background: #eee;
+}
+
+/* login page css  */
+.login_page {
+  background: url("../assets/login_bg.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+/* sign up page css  */
+.signUp_page {
+  background: url("../assets/signUp_bg.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
