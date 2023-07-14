@@ -5,7 +5,7 @@ import TimelinePost from "../utils/TimelinePost";
 const TimelinePosts = () => {
       const { isError, isLoading, isSuccess, data:posts } = useGetPostsApiQuery();
 
-      let content = null;
+      let content;
       if (isLoading) {
           content = <p className="h-screen">Loading...</p>
       }
@@ -21,6 +21,7 @@ const TimelinePosts = () => {
       if (!isLoading && !isError && posts?.length > 0) {
           content = posts?.slice(0, 3)?.map(post => <TimelinePost timelinePost={post} key={post._id}/>);
       }
+      console.log("error", isError, isLoading, isSuccess, posts)
 
       return (
             <main className="w-full">
