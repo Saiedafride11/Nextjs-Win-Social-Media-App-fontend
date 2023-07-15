@@ -2,7 +2,7 @@
 import { useGetPostsApiQuery } from "@/redux/service/api/postsApi";
 import TimelinePost from "../utils/TimelinePost";
 
-const TimelinePosts = () => {
+const HomePosts = () => {
       const { isError, isLoading, isSuccess, data:posts } = useGetPostsApiQuery();
 
       let content;
@@ -19,9 +19,9 @@ const TimelinePosts = () => {
       }
   
       if (!isLoading && !isError && posts?.length > 0) {
-          content = posts?.slice(0, 3)?.map(post => <TimelinePost timelinePost={post} key={post._id}/>);
+        const topReactionPosts = posts?.slice(0, 3)?.sort((a, b) => b.reactions.length - a.reactions.length)
+        content = topReactionPosts?.map(post => <TimelinePost timelinePost={post} key={post._id}/>);
       }
-      console.log("error", isError, isLoading, isSuccess, posts)
 
       return (
             <main className="w-full">
@@ -32,4 +32,4 @@ const TimelinePosts = () => {
       );
 };
 
-export default TimelinePosts;
+export default HomePosts;

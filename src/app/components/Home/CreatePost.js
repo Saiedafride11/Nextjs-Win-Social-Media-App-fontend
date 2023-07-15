@@ -53,8 +53,8 @@ const CreatePost = () => {
       formData.append('userPhoto', "https://lh3.googleusercontent.com/a/AAcHTtfWlew0XE77fyh6m46Bd9g3_vVleba8Ri7ryrIKv6H8qW8=s96-c");
       formData.append('post', post);
       formData.append('email', email);
-      formData.append('reaction', reaction);
-      formData.append('comment', comment);
+      formData.append('reactions', reaction);
+      formData.append('comments', comment);
       formData.append('image', image);
 
       // fetch('http://localhost:5000/posts', {

@@ -14,6 +14,7 @@ const AboutApi = apiSlice.injectEndpoints({
         method: "PATCH",
         body: formData,
       }),
+      invalidatesTags: ["about"],
     }),
   }),
 });

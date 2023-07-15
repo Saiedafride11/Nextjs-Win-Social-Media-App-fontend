@@ -1,7 +1,8 @@
 "use client";
 import { useUpdateAboutApiMutation } from "@/redux/service/api/aboutApi";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { ToastError, ToastSuccess } from "../components/utils/toast";
 
 const AboutContent = ({about}) => {
       const router = useRouter();
@@ -21,16 +22,16 @@ const AboutContent = ({about}) => {
             setEditOpen(!editOpen);
       }
 
-      // useEffect(() => {
-      //       if (!isLoading && isSuccess) {
-      //         router.push("/");
-      //         setEditOpen(!editOpen);
-      //         ToastSuccess("About Update Successful!");
-      //       }
-      //       if (!isLoading && !isSuccess && isError) {
-      //         ToastError("Sorry! something was wrong.");
-      //       }
-      // }, [isLoading, isSuccess, isError]);
+      useEffect(() => {
+            if (!isLoading && isSuccess) {
+              router.push("/");
+              setEditOpen(!editOpen);
+              ToastSuccess("About Update Successful!");
+            }
+            if (!isLoading && !isSuccess && isError) {
+              ToastError("Sorry! something was wrong.");
+            }
+      }, [isLoading, isSuccess, isError]);
 
       return (
             <div>

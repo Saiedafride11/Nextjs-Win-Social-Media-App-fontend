@@ -24,7 +24,7 @@ const Media = () => {
       return (
             <main className="w-full">
                   <section className="container px-2 lg:px-96 mx-auto pt-4">
-                        { content }
+                    { content }
                   </section>
             </main>
       );

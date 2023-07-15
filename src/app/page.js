@@ -1,7 +1,7 @@
 "use client";
 
 import CreatePost from "./components/Home/CreatePost";
-import TimelinePosts from "./components/Home/TimelinePosts";
+import HomePosts from "./components/Home/HomePosts";
 
 
 
@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <main>
       <CreatePost/>
-      <TimelinePosts/>
+      <HomePosts/>
     </main>
   );
 }

@@ -1,8 +1,8 @@
 "use client";
 import PrivateRoute from "@/app/components/privateRoute/privateRoute";
 import Error from "@/app/components/utils/Error";
+import TimelinePost from "@/app/components/utils/TimelinePost";
 import { useGetPostApiQuery } from "@/redux/service/api/postsApi";
-import SinglePost from "./SinglePost";
 
 const MediaDetails = ({params}) => {
       const { isError, isLoading, isSuccess, data:singlePost } = useGetPostApiQuery(params.id);
@@ -21,15 +21,13 @@ const MediaDetails = ({params}) => {
       }
   
       if (!isLoading && !isError && singlePost) {
-          content = <SinglePost singlePost={singlePost}/>;
+          content = <TimelinePost timelinePost={singlePost} page="post-details"/>  ;
       }
       return (
             <PrivateRoute>
                   <main className="w-full">
                         <section className="container px-2 lg:px-96 mx-auto pt-4">
-                              <div className="py-5 box-border bg-white border-2 border-white p-5 rounded-md shadow-lg shadow-gray-300/80 mb-3">
-                                    {content}
-                              </div>
+                              {content}
                         </section>
                   </main>
             </PrivateRoute>
