@@ -1,16 +1,25 @@
 "use client";
-import { logOutUser } from "@/redux/features/Auth/authSlice";
+import { logOutUser, saveUser } from "@/redux/features/Auth/authSlice";
 import { signOut } from "firebase/auth";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AiOutlineClose, AiOutlineMenuFold } from "react-icons/ai";
 import { IoLogOutOutline } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import logo from "../../../assets/logo.png";
 import Auth from "../firebase/firebase.init";
 import { ToastSuccess } from "../utils/toast";
+
+const getFromLocalStorageEmail = () => {
+      const email = localStorage.getItem('email')
+      if(email) {
+          return JSON.parse(localStorage.getItem('email'))
+      } else {
+          
+      }
+  } 
 
 const Header = () => {
       const { email } = useSelector((state) => state.user);
@@ -25,7 +34,7 @@ const Header = () => {
             dispatch(logOutUser());
             localStorage.clear();
             ToastSuccess("Logout Successful!");
-            router.push("/");
+            router.push("/login");
           })
           .catch((error) => {
             // An error happened.
@@ -40,7 +49,10 @@ const Header = () => {
          ];
       let [open, setOpen] = useState(false);
 
-     
+     useEffect( () => {
+      dispatch(saveUser(getFromLocalStorageEmail()));
+     }, [])
+
       return (
             <main className="w-full h-full flex flex-col justify-center items-center">
                    <div className="bg-[#1b74e4] shadow-md w-full h-full flex justify-center items-center">

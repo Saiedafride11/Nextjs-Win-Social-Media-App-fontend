@@ -1,9 +1,11 @@
+
 import Auth from "@/app/components/firebase/firebase.init";
 import { ToastError, ToastSuccess } from "@/app/components/utils/toast";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
+  onAuthStateChanged,
   signInWithEmailAndPassword,
   signInWithPopup
 } from "firebase/auth";
@@ -12,6 +14,7 @@ import {
 const initialState = {
   isLoading: false,
   email: "",
+  displayName: "",
   isSuccess: false,
   isError: false,
   errorMassage: "",
@@ -46,20 +49,23 @@ export const googleSignInUser = createAsyncThunk(
   }
 );
 
+export const currentUserProvider = () => {
+  const unsubscribed = onAuthStateChanged(Auth, (user) => {
+        if (user) {
+          // console.log("User is unsubscribed-", user?.displayName);
+          localStorage.setItem("email", JSON.stringify(user.email));
+        } 
+    });
+    return () => unsubscribed;
+}
+
 
 const authSlice = createSlice({
   name: "Auth",
   initialState,
   reducers: {
     saveUser: (state, action) => {
-      if(JSON.parse(localStorage.getItem("email"))){
-        // for google sign in
-        const email = JSON.parse(localStorage.getItem("email"));
-        state.email = action.payload | email;
-      }
-      else{
-        state.email = action.payload;
-      }
+      state.email = action.payload;
       localStorage.setItem("email", JSON.stringify(action.payload));
       state.isLoading = false;
     },

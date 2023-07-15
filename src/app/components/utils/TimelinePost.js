@@ -15,7 +15,7 @@ const TimelinePost = ({timelinePost, page}) => {
       const [updatePostsCommentApi, { isLoading, isSuccess, isError }] = useUpdatePostsCommentApiMutation();
       const { email } = useSelector((state) => state.user);
       const [comment, setComment ] = useState("");
-      
+      console.log("------ email---", email)
       const handleCommentKeypress = e => {
             if (e.key === "Enter") {
                   if(email){
